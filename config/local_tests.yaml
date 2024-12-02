@@ -1,4 +1,5 @@
 env: "local"
+storage-type: "sqlite"
 storage_path: "./storage/sso.db"
 grpc:
   port: 44044
