@@ -17,10 +17,12 @@ type Storage struct {
 	db *sql.DB
 }
 
-func New(storagePath string) (*Storage, error) {
-	const op = "storage.postgres.New"
+func New(host, port, user, password, dbname string) (*Storage, error) {
+	const op = "storage.sqlite.New"
+	connString := fmt.Sprintf("host=%s port=%d user=%s "+"password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
 
-	db, err := sql.Open("postgres", storagePath)
+	db, err := sql.Open("postgres", connString)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}
